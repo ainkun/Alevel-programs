@@ -1,3 +1,5 @@
+import os
+
 #PART_A
 
 QueueData = ["" for I in range(0, 20)]
@@ -19,20 +21,20 @@ def Enqueue(DataToAdd, QueueData, EndP):
 #PART_C
 
 def ReadFile(QueueData, StartP, EndP):
-	FileName = input("Enter a filename")
+	FileName = input("Enter a filename: ")
 	if (os.path.isfile(FileName)):
 		f = open(FileName, "r")
 		Flag = True
 		DataToInsert = (f.readline()).strip()
-		while (Flag == True and DataToInsert != null):
-			Flag, EndP = Enqueue(QueueData, EndP)
+		while (Flag == True and DataToInsert != ''):
+			Flag, EndP = Enqueue(DataToInsert, QueueData, EndP)
 			DataToInsert = (f.readline()).strip()
-			if (Flag == False):
-				f.close()
-				return 1, EndP
-			else:
-				f.close()
-				return 2, EndP
+		if (Flag == False):
+			f.close()
+			return 1, EndP
+		else:
+			f.close()
+			return 2, EndP
 	else:
 		return -1, EndP
 
@@ -46,8 +48,7 @@ elif(ReturnValue == 1):
 	print("The queue was full, not all items were read")
 else:
 	print("All items successfully added")
-
-
+	
 
 #PART_E
 
